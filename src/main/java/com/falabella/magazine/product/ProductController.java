@@ -51,6 +51,6 @@ public class ProductController {
 		@RequestParam(required = false) Float price,
 		@RequestParam(required = false) String principalImageURL,
 		@RequestParam(required = false) List<String> otherImageURLs) {
-			productService.updateProduct(sku, name, brand, size, price, principalImageURL, otherImageURLs);
+			productService.updateProduct(new Product(sku, name, brand, size, price, principalImageURL, otherImageURLs));
 	}
 }
