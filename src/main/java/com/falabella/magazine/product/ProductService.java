@@ -116,5 +116,9 @@ public class ProductService {
 		if(principalImageURL != null && product.getPrincipalImageURL() != principalImageURL){
 			product.setPrincipalImageURL(principalImageURL);
 		}
+
+		if(otherImageURLs != null && product.getOtherImageURLs() != otherImageURLs){
+			product.setOtherImageURLs(otherImageURLs);
+		}
 	}
 }
