@@ -124,13 +124,27 @@ public class Product {
 	public String toString() {
 		return "Product{"+
 			"sku: " + sku +
-			"name: " + name +
-			"brand: " + brand +
-			"size: " + size +
-			"price: " + price +
-			"principalImageURL: " + principalImageURL +
-			"otherImageURLs: " + otherImageURLs.toString() +
+			",name: " + name +
+			",brand: " + brand +
+			",size: " + size +
+			",price: " + price +
+			",principalImageURL: " + principalImageURL +
+			",otherImageURLs: " + otherImageURLs.toString() +
 			"}";
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Product product = (Product) o;
+		return sku == product.getSKU() &&
+		name == product.getName() &&
+		brand == product.getBrand() &&
+		size == product.getSize() &&
+		price.equals(product.getPrice()) &&
+		principalImageURL == product.getPrincipalImageURL() &&
+		otherImageURLs.equals(product.getOtherImageURLs());
 	}
 	
 	public Boolean hasValidPrincipalImageURL() {
