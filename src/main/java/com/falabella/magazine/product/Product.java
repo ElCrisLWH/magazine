@@ -1,5 +1,8 @@
 package com.falabella.magazine.product;
 
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -128,5 +131,31 @@ public class Product {
 			"principalImageURL: " + principalImageURL +
 			"otherImageURLs: " + otherImageURLs.toString() +
 			"}";
+	}
+	
+	public Boolean hasValidPrincipalImageURL() {
+		return isValidURL(principalImageURL);	
+	}
+	
+	public Boolean hasValidOtherImageURLs() {
+		if(otherImageURLs != null){
+			for (int i = 0; i < otherImageURLs.size(); i++) {
+				if(!isValidURL(otherImageURLs.get(i))) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	public static Boolean isValidURL(String url) {
+		try {
+			new URL(url).toURI();
+			return true;
+		} catch (MalformedURLException e) {
+			return false;
+		} catch (URISyntaxException e) {
+			return false;
+		}
 	}
 }

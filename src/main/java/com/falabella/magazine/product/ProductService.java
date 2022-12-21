@@ -69,6 +69,13 @@ public class ProductService {
 		if(product.getPrincipalImageURL() == null){
 			throw new IllegalArgumentException("product principal image url cannot be empty");
 		}
+		if(!product.hasValidPrincipalImageURL()){
+			throw new IllegalArgumentException("product principal image url format is invalid");
+		}
+
+		if(!product.hasValidOtherImageURLs()){
+			throw new IllegalArgumentException("product other image urls format is invalid");
+		}
 
 		productRepository.save(product);
 	}
@@ -114,10 +121,16 @@ public class ProductService {
 		}
 		
 		if(principalImageURL != null && product.getPrincipalImageURL() != principalImageURL){
+			if(!product.hasValidPrincipalImageURL()){
+				throw new IllegalArgumentException("product principal image url format is invalid");
+			}
 			product.setPrincipalImageURL(principalImageURL);
 		}
 
 		if(otherImageURLs != null && product.getOtherImageURLs() != otherImageURLs){
+			if(!product.hasValidOtherImageURLs()){
+				throw new IllegalArgumentException("product other image urls format is invalid");
+			}
 			product.setOtherImageURLs(otherImageURLs);
 		}
 	}
