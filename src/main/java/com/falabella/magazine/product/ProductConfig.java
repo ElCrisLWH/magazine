@@ -13,7 +13,6 @@ public class ProductConfig {
 	CommandLineRunner commandLineRunner(ProductRepository productRepository) {
 		return args -> {
 			Product zapatilla = new Product(
-				1L,
 				"FAL-840627000",
 				"500 Zapatilla Urbana Mujer",
 				"New Balance",
@@ -31,7 +30,6 @@ public class ProductConfig {
 				List.of("https://falabella.scene7.com/is/image/Falabella/881952283_2")
 			);
 			Product camisa = new Product(
-				2L,
 				"FAL-881898502",
 				"Camisa Manga Corta Hombre",
 				"Basement",

@@ -27,9 +27,9 @@ public class ProductController {
 		return productService.listProducts();
 	}
 
-	@GetMapping(path = "{productId}")
-	public Product getProduct(@PathVariable("productId") Long productId) {
-		return productService.getProduct(productId);
+	@GetMapping(path = "{sku}")
+	public Product getProduct(@PathVariable("sku") String sku) {
+		return productService.getProduct(sku);
 	}
 
 	@PostMapping
@@ -37,21 +37,20 @@ public class ProductController {
 		productService.createProduct(product);
 	}
 
-	@DeleteMapping(path = "{productId}")
-	public void deleteProduct(@PathVariable("productId") Long productId) {
-		productService.deleteProduct(productId);
+	@DeleteMapping(path = "{sku}")
+	public void deleteProduct(@PathVariable("sku") String sku) {
+		productService.deleteProduct(sku);
 	}
 
-	@PutMapping(path = "{productId}")
+	@PutMapping(path = "{sku}")
 	public void updateProduct(
-		@PathVariable("productId") Long productId,
-		@RequestParam(required = false) String sku,
+		@PathVariable("sku") String sku,
 		@RequestParam(required = false) String name,
 		@RequestParam(required = false) String brand,
 		@RequestParam(required = false) String size,
 		@RequestParam(required = false) Float price,
 		@RequestParam(required = false) String principalImageURL,
 		@RequestParam(required = false) List<String> otherImageURLs) {
-			productService.updateProduct(productId, sku, name, brand, size, price, principalImageURL, otherImageURLs);
+			productService.updateProduct(sku, name, brand, size, price, principalImageURL, otherImageURLs);
 	}
 }

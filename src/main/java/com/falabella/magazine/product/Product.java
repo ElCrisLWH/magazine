@@ -5,28 +5,13 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table
 public class Product {
-	// The internal stock-keeping unit is used as product id
 	@Id
-	@SequenceGenerator(
-		name = "product_sequence",
-		sequenceName = "product_sequence",
-		allocationSize = 1
-		
-	)
-	@GeneratedValue(
-		strategy = GenerationType.SEQUENCE,
-		generator = "product_sequence"
-	)
-	private Long id;
 	private String sku;
 	private String name;
 	private String brand;
@@ -38,16 +23,6 @@ public class Product {
 	private List<String> otherImageURLs;
 
 	public Product() {
-	}
-
-	public Product(Long id, String sku, String name, String brand, String size, Float price, String principalImageURL) {
-		this.id = id;
-		this.sku = sku;
-		this.name = name;
-		this.brand = brand;
-		this.size = size;
-		this.price = price;
-		this.principalImageURL = principalImageURL;
 	}
 
 	public Product(String sku, String name, String brand, String size, Float price, String principalImageURL, List<String> otherImageURLs) {
@@ -86,10 +61,6 @@ public class Product {
 		this.principalImageURL = principalImageURL;
 	}
 
-	public Long getId() {
-		return this.id;
-	}
-
 	public String getSKU() {
 		return this.sku;
 	}
@@ -116,10 +87,6 @@ public class Product {
 
 	public List<String> getOtherImageURLs() {
 		return this.otherImageURLs;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public void setSKU(String sku) {
@@ -153,7 +120,7 @@ public class Product {
 	@Override
 	public String toString() {
 		return "Product{"+
-			"id: " + id +
+			"sku: " + sku +
 			"name: " + name +
 			"brand: " + brand +
 			"size: " + size +

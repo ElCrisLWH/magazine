@@ -22,9 +22,9 @@ public class ProductService {
 		return productRepository.findAll();
 	}
 
-	public Product getProduct(Long productId) {
-		Product product = productRepository.findById(productId).orElseThrow(() -> new IllegalArgumentException(
-			"product wiht id " + productId + "does not exist"));
+	public Product getProduct(String sku) {
+		Product product = productRepository.findById(sku).orElseThrow(() -> new IllegalArgumentException(
+			"product wiht sku " + sku + "does not exist"));
 		return product;
 	}
 
@@ -36,7 +36,7 @@ public class ProductService {
 		if(pattern.matcher(product.getSKU()).matches()){
 			throw new IllegalArgumentException("product sku format is invalid");
 		}
-		Optional<Product> productOptional = productRepository.findProductbySKU(product.getSKU());
+		Optional<Product> productOptional = productRepository.findById(product.getSKU());
 		if (productOptional.isPresent()) {
 			throw new IllegalArgumentException("product sku already in use");
 		}
@@ -73,18 +73,18 @@ public class ProductService {
 		productRepository.save(product);
 	}
 
-	public void deleteProduct(Long productId) {
-		boolean exists = productRepository.existsById(productId);
+	public void deleteProduct(String sku) {
+		boolean exists = productRepository.existsById(sku);
 		if (!exists) {
-			throw new IllegalArgumentException("product with id " + productId + " does not exist");
+			throw new IllegalArgumentException("product with sku " + sku + " does not exist");
 		}
-		productRepository.deleteById(productId);
+		productRepository.deleteById(sku);
 	}
 
 	@Transactional
-	public void updateProduct(Long productId, String sku, String name, String brand, String size, Float price, String principalImageURL, List<String> otherImageURLs) {
-		Product product = productRepository.findById(productId).orElseThrow(() -> new IllegalArgumentException(
-			"product wiht id " + productId + "does not exist"));
+	public void updateProduct(String sku, String name, String brand, String size, Float price, String principalImageURL, List<String> otherImageURLs) {
+		Product product = productRepository.findById(sku).orElseThrow(() -> new IllegalArgumentException(
+			"product wiht sku " + sku + "does not exist"));
 
 		if(name != null && product.getName() != name) {
 			if(product.getName().length() > 50 || product.getName().length() < 3){
