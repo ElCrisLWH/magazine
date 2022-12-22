@@ -25,7 +25,7 @@ public class ProductService {
 
 	public Product getProduct(String sku) {
 		Product product = productRepository.findById(sku).orElseThrow(() -> 
-			new HttpClientErrorException(HttpStatus.NOT_FOUND, "product wiht sku " + sku + "does not exist"));
+			new HttpClientErrorException(HttpStatus.NOT_FOUND, "product wiht sku " + sku + " does not exist"));
 		return product;
 	}
 
@@ -102,7 +102,7 @@ public class ProductService {
 			throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "product sku must be declared");
 		}
 		Product product = productRepository.findById(sku).orElseThrow(() ->
-			new HttpClientErrorException(HttpStatus.NOT_FOUND, "product wiht sku " + sku + "does not exist"));
+			new HttpClientErrorException(HttpStatus.NOT_FOUND, "product wiht sku " + sku + " does not exist"));
 
 		if(name != null && product.getName() != name) {
 			if(name.length() > 50 || name.length() < 3){
